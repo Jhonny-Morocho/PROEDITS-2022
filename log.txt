@@ -1,0 +1,9 @@
+[2021-04-30 02:43:46] NOTIFCAR LOS 8 DIAS PARA CONFIRMAR CONTRATACIÓN :
+                    Nombre del empleador Ing Luis Alberto
+                    Cambiar de estado a la oferta laboral a finalizado: true
+                    Oferta laboral Ing en front end--
+                    Correo del empleador udemy@hotmail.com = Estado enviar correo empleador: true
+
+
+
+dadsa
