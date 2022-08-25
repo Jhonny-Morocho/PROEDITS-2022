@@ -1,5 +1,5 @@
 <?php
-
+use Carbon\Carbon;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -14,6 +14,12 @@
 */
 
 $router->get('/', function () use ($router) {
+    echo  date_default_timezone_get();
+    echo "<br>";
+    $hoy = date("Y-m-d H:i:s");
+    echo $hoy;
+    echo "<br>";  
+    echo "CARBON ".Carbon::now();
     return $router->app->version();
 });
 

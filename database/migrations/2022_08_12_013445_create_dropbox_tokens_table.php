@@ -12,7 +12,10 @@ class CreateDropboxTokensTable extends Migration
      * @return void
      */
     public function up()
-    {
+    
+    {   
+        // OJO
+        //en ves de timestamps poner datetime para q la fecha vaya desde el fronten
         Schema::create('dropbox_tokens', function (Blueprint $table) {
             $table->id();
             $table->string('token_type');

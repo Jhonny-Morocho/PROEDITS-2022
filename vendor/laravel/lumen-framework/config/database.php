@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-function date_default_timezone_offset_get()
-{
-    $offset = timezone_offset_get(new \DateTimeZone(date_default_timezone_get()), new \DateTime());
-    return sprintf("%s%02d:%02d", ($offset >= 0) ? '+' : '-', abs($offset / 3600), abs($offset % 3600));
-}
+
 return [
 
     /*
@@ -58,7 +54,7 @@ return [
             'prefix' => env('DB_PREFIX', ''),
             'strict' => env('DB_STRICT_MODE', true),
             'engine' => env('DB_ENGINE', null),
-            'timezone' => env('DB_TIMEZONE', date_default_timezone_offset_get()),
+            'timezone' => env('DB_TIMEZONE','+00:00'),
         ],
 
         'pgsql' => [

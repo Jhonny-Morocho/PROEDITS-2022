@@ -54,6 +54,7 @@ trait DropboxBoostrap {
               $access_token=$responseToken->access_token;
               
               Cache::put($key,$access_token,$expireDate);
+            
               $app = new DropboxApp($dropboxKey, $dropboxSecret,$existeToken->access_token);
               return $app;
             }
