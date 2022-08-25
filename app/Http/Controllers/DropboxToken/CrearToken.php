@@ -21,7 +21,8 @@ class CrearToken {
               $ObjDrobox->token_type=$resDropbox->token_type;
               $ObjDrobox->access_token=$resDropbox->access_token;
               $ObjDrobox->expires_in=$resDropbox->expires_in;
-              $ObjDrobox->expires_in=$resDropbox->expires_in;
+              $ObjDrobox->created_at=Carbon::now();
+              $ObjDrobox->updated_at=Carbon::now();
               $ObjDrobox->save();
               return $ObjDrobox;
             } else {
