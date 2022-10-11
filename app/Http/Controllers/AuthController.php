@@ -18,15 +18,15 @@ class AuthController extends Controller
     {
 
         //validate incoming request 
-        $this->validate($request, [
-            'username' => 'required|string|unique:users',
-            'password' => 'required|confirmed',
+        $validacion=$this->validate($request, [
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
-    
+
         try 
         {
             $user = new Client();
-            $user->username= $request->input('username');
+            $user->correo= $request->input('username');
             $user->password = app('hash')->make($request->input('password'));
             $user->save();
 
@@ -57,12 +57,11 @@ class AuthController extends Controller
     {
           //validate incoming request 
         $this->validate($request, [
-            'username' => 'required|string',
+            'correo' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        $credentials = $request->only(['username', 'password']);
-
+        $credentials = $request->only(['correo', 'password']);
         if (! $token = Auth::attempt($credentials)) {			
             return response()->json(['message' => 'Unauthorized'], 401);
         }
