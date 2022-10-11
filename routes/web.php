@@ -26,6 +26,15 @@ $router->get('/', function () use ($router) {
 
 try {
     // Auth
+    //$router->post('register','AuthController@register');
+    //$router->post('/proveedor/login','ProveedorController@login');
+     $router->group(['prefix' => 'api'], function () use ($router) 
+    {
+
+        $router->post('register', 'AuthController@register');
+         $router->post('login', 'AuthController@login');  
+    }); 
+ /*    
     $router->post('/proveedor/login','ProveedorController@login');
     $router->post('/clientes/login','ClienteController@login');
     $router->post('/clientes/loginSocial','ClienteController@loginSocial');
@@ -124,7 +133,7 @@ try {
     //Membership
     $router->post('/membresia/editarMembresia/{idAdmin}','MembresiaController@editarMembresia');
     $router->get('/membresia/listarMembresiasPanel/{idAdmin}','MembresiaController@listarMembresiaPanel');
-    $router->get('/membresia/listarMembresiaPublico','MembresiaController@listarMembresiaPublico');
+    $router->get('/membresia/listarMembresiaPublico','MembresiaController@listarMembresiaPublico'); */
 
 } catch (\Throwable $th) {
     dd( $th->getMessage());

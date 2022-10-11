@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
-
+use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
     // swigger documentacion https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Annotations#quick-annotation-overview
@@ -18,4 +18,12 @@ class Controller extends BaseController
      *   )
      * )
      */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 60
+        ], 200);
+    }
 }
