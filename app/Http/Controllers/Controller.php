@@ -6,18 +6,33 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
-    // swigger documentacion https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Annotations#quick-annotation-overview
-    //SWAGGER-LUMEN
     /**
-     * @OA\Info(
-     *   title="PROEDITSCLUB API - LARAVEL LUMEN",
-     *   version="1.0",
-     *   @OA\Contact(
-     *     email="support@example.com",
-     *     name="Support Team"
-     *   )
+     * @OA\Info(title="PROEDITSCLUB-API-2022", version="1")
+     */
+
+    /**
+     * @OA\Get(
+     *     path="/api/me",
+     *     @OA\Response(response="200", description="An example resource")
      * )
      */
+    
+    //************** SEGURIDAD TOKEN **********//
+    /**
+     * @OA\OpenApi(
+     *   security={{"bearerAuth": {}}}
+     * )
+     *
+     * @OA\SecurityScheme(
+     *   securityScheme="bearerAuth",
+     * description="Authentication Bearer Token",
+     *   type="http",
+     * bearerFormat="JWT",
+     * securityScheme="Bearer dsfdgfd",
+     *   scheme="bearer",
+     * )
+     */
+
     protected function respondWithToken($token)
     {
         return response()->json([

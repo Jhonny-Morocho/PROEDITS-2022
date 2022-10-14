@@ -8,26 +8,50 @@ use App\Models\Proveedor;
 use Illuminate\Support\Facades\Crypt;
 class ClienteController extends Controller{
 
+     /**
+     * @OA\Get(
+     *      path="/api/clientes/listasClientesPanel",
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Es una lista de clientes solo para panel de administacíon")
+     * ),
+     * @OA\Response(
+     *          response="default",
+     *          description="an ""unexpected"" error"
+     * )
+     */
     public function listasClientesPanel($idAdmin){
         return Clientes\ListarClientes::listasClientesPanel($idAdmin);
     }
 
-
-
 /**
- * @OA\Get(
- *     path="/api/assets/getall",
- *     operationId="getAssets",
- *     tags={"Assets"},
- *     summary="Get all Assets",
- *     description="Fetches all the Asset records",
-
- *     @OA\Response(
- *          ref="success",
- *          response=200,
- *          description="OK",
- *          @OA\JsonContent(ref="#/components/schemas/standardResponse"),
- *      ),
+ * @OA\Post(
+ *   path="/v1/media/upload",
+ *   summary="Upload document",
+ *   description="",
+ *   tags={"Media"},
+ *   @OA\RequestBody(
+ *     required=true,
+ *     @OA\MediaType(
+ *       mediaType="application/octet-stream",
+ *       @OA\Schema(
+ *         required={"content"},
+ *         @OA\Property(
+ *           description="Binary content of file",
+ *           property="content",
+ *           type="string",
+ *           format="binary"
+ *         )
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(
+ *     response=200, description="Success",
+ *     @OA\Schema(type="string")
+ *   ),
+ *   @OA\Response(
+ *     response=400, description="Bad Request"
+ *   )
  * )
  */
     public function login(Request $request){
@@ -45,7 +69,27 @@ class ClienteController extends Controller{
 
 
 
-
+/**
+ * @OA\Post(
+ *   path="/v1/user/update",
+ *   summary="Form post",
+ *   @OA\RequestBody(
+ *     @OA\MediaType(
+ *       mediaType="multipart/form-data",
+ *       @OA\Schema(
+ *         @OA\Property(property="name"),
+ *         @OA\Property(
+ *           description="file to upload",
+ *           property="avatar",
+ *           type="string",
+ *           format="binary",
+ *         ),
+ *       )
+ *     )
+ *   ),
+ *   @OA\Response(response=200, description="Success")
+ * )
+ */
 
     public function loginSocial(Request $request){
         try {
@@ -57,7 +101,6 @@ class ClienteController extends Controller{
             return response()->json(["sms"=>$th->getMessage(),"Siglas"=>"ERROR"]);
         }
     }
-
 
 
 
@@ -77,33 +120,6 @@ class ClienteController extends Controller{
 
 
 
-
-    /**
-     * @OA\Post(
-     *     path="/pets",
-     *     operationId="addPet3",
-     *     description="Creates a new pet in the store.  Duplicates are allowed",
-     *     tags={"store"},
-     *     @OA\RequestBody(
-     *         description="Pet to add to the store",
-     *         required=true,
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(ref="#/components/schemas/NewPet")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="pet response",
-     *         @OA\JsonContent(ref="#/components/schemas/Pet")
-     *     ),
-     *     @OA\Response(
-     *         response="default",
-     *         description="unexpected error",
-     *         @OA\JsonContent(ref="#/components/schemas/ErrorModel")
-     *     )
-     * )
-     */
     public function registrarCliente(Request $request){
         try {
             $this->validate($request, [

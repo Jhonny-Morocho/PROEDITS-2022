@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        "App\Console\Commands\NotificarUsuarios"
+        "App\Console\Commands\SwaggerScan"
     ];
 
     /**
@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:notificarUsuarios')->everyMinute();
+        $schedule->command('swg:scan')->everyMinute();
         //$schedule->command('command:eliminarMensaje')->everyMinute();
     }
 

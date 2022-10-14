@@ -1,0 +1,114 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PROEDITSCLUB-API-2022",
+        "version": "1"
+    },
+    "paths": {
+        "/api/clientes/listasClientesPanel": {
+            "get": {
+                "operationId": "b4f6840e4f3427b5a9d5426761d292a9",
+                "responses": {
+                    "200": {
+                        "description": "Es una lista de clientes solo para panel de administacíon"
+                    }
+                }
+            }
+        },
+        "/v1/media/upload": {
+            "post": {
+                "tags": [
+                    "Media"
+                ],
+                "summary": "Upload document",
+                "description": "",
+                "operationId": "2a6417063b38ca280055f4329a39a0d2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "required": [
+                                    "content"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "description": "Binary content of file",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/v1/user/update": {
+            "post": {
+                "summary": "Form post",
+                "operationId": "5608ed4d6e844566a97496c98841996a",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {},
+                                    "avatar": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/me": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "default": {
+                "description": "an \"unexpected\" error"
+            }
+        },
+        "securitySchemes": {
+            "Bearer dsfdgfd": {
+                "type": "http",
+                "description": "Authentication Bearer Token",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ]
+}
