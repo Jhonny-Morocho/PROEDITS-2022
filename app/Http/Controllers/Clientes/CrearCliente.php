@@ -20,16 +20,16 @@ class CrearCliente {
             $passwordCliente=$datos["password"];
             $password_hashed=password_hash($passwordCliente,PASSWORD_BCRYPT,$opciones);
             $objCliente=new Cliente();
+            return $objCliente->assignRole('cliente');
             $objCliente->nombre =$datos['nombre'];
             $objCliente->apellido =$datos['apellido'];
             $objCliente->correo=$datos['correo'];
-            $objCliente->proveedor=$datos['proveedor'];
-            $objCliente->tipo_usuario='Cliente';
+           $objCliente->proveedor=$datos['proveedor']; 
             $objCliente->password=$password_hashed;
             $objCliente->estado=$datos['estado'];
             $objCliente->saldo=0;
             $objCliente->save();
-
+            $objCliente->assignRole('cliente');
             $respUsuario=array(
                 "id"=>Crypt::encrypt($objCliente->id),
                 "nombre"=>$objCliente->nombre,
@@ -43,8 +43,8 @@ class CrearCliente {
                 return response()->json(["sms"=>"No se pude registrar al usuario ".$datos['correo'],"Siglas"=>"UNR",'res'=>$objCliente]);
             }
             return response()->json(["sms"=>"Operación exitosa","Siglas"=>"OE",'res'=>$respUsuario]);
-        } catch (\Throwable $th) {
-            return response()->json(["sms"=>$th->getMessage(),"Siglas"=>"ONE",'res'=>null]);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            return response()->json(["sms"=>$ex->getMessage(),"Siglas"=>"ONE",'res'=>null]);
         }
     }
 }

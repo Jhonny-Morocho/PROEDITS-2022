@@ -9,8 +9,9 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 class Cliente extends Model implements AuthenticatableContract,AuthorizableContract,JWTSubject{
-    use Authenticatable, Authorizable;
+    use Authenticatable, Authorizable,HasRoles;
     //nombre de la tabla
     protected $table="cliente";
     //para saber si en la tabla usamos created_at y update_at

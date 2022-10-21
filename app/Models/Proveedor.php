@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Permission\Traits\HasRoles;
 class Proveedor extends Model{
+    use HasRoles;
     //nombre de la tabla
     protected $table="proveedor";
     //para saber si en la tabla usamos created_at y update_at

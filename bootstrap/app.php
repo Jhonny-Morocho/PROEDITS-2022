@@ -85,7 +85,9 @@ $app->configure('app');
 // ]);
 
  $app->routeMiddleware([
-     'auth' => App\Http\Middleware\Authenticate::class,
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
  ]);
 
 /*
@@ -100,17 +102,24 @@ $app->configure('app');
 */
 
  $app->register(App\Providers\AppServiceProvider::class);
+ //estos son los guards
  $app->register(App\Providers\AuthServiceProvider::class);
  $app->register(App\Providers\EventServiceProvider::class);
  $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
  $app->register(Chuckrincon\LumenConfigDiscover\DiscoverServiceProvider::class);
- 
+
 
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 //comprimir imagenes
 $app->register('Intervention\Image\ImageServiceProvider'); class_alias('Intervention\Image\Facades\Image', 'Image');
 //swagger-lumen
 $app->register(\SwaggerLume\ServiceProvider::class);
+//Larasupport Package https://github.com/irazasyed/larasupport
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+//configurar roles y permisos
+$app->configure('permission');
+$app->alias('cache', \Illuminate\Cache\CacheManager::class);  // if you don't have this already
+$app->register(Spatie\Permission\PermissionServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

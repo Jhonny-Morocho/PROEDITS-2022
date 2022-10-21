@@ -121,8 +121,9 @@ class ClienteController extends Controller{
 
 
     public function registrarCliente(Request $request){
+        $data=null;
         try {
-            $this->validate($request, [
+            $data=$this->validate($request, [
                'nombre' => 'required|string|max:50|min:3',
                'apellido' => 'required|string|max:50|min:3',
                'correo' => 'required|email|max:255',
@@ -131,8 +132,12 @@ class ClienteController extends Controller{
                'password' => 'required|string|max:50|min:3'
            ]);
            return Clientes\CrearCliente::registrarCliente($request);
-        } catch (\Throwable $th) {
-            return response()->json(["sms"=>$th->getMessage(),"Siglas"=>"ERROR",'res'=>null]);
+        }
+        catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(["sms"=>$e->response->original,"Siglas"=>"ERROR",'res'=>$data]);
+        }
+        catch (\Throwable $th) {
+            return response()->json(["sms"=>$th->getMessage(),"Siglas"=>"ERROR",'res'=>$data]);
         }
 
     }

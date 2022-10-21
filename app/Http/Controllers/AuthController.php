@@ -13,15 +13,18 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login','register']]);
     }
+    public function registrarProveedor(){
 
+    }
+    
     public function register(Request $request)
     {
 
         //validate incoming request 
         $validacion=$this->validate($request, [
             'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
+            'password' => 'required|string']
+        );
 
         try 
         {

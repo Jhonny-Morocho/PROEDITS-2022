@@ -11,11 +11,13 @@
         "flipbox/lumen-generator": "^8.2",
         "hmazter/laravel-schedule-list": "^2.2",
         "intervention/image": "^2.7",
+        "irazasyed/larasupport": "^1.7",
         "kunalvarma05/dropbox-php-sdk": "^0.4.0",
         "laravel/lumen-framework": "^8.0",
         "paymentez/sdk": "^1.2",
         "paypal/rest-api-sdk-php": "^1.14",
         "phpmailer/phpmailer": "^6.3",
+        "spatie/laravel-permission": "^5.5",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {

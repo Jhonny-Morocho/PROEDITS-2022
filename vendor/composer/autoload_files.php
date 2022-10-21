@@ -34,5 +34,7 @@ return array(
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
     '0ccdf99b8f62f02c52cba55802e0c2e7' => $vendorDir . '/zircote/swagger-php/src/functions.php',
     '3585c46f9622c6b622ab0011d4d72b3a' => $vendorDir . '/darkaonline/swagger-lume/src/helpers.php',
+    'df7cc821128228bf36c2141e6b4f8b50' => $vendorDir . '/irazasyed/larasupport/src/helpers.php',
     'ec07570ca5a812141189b1fa81503674' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+    '377b22b161c09ed6e5152de788ca020a' => $vendorDir . '/spatie/laravel-permission/src/helpers.php',
 );

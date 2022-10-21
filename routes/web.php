@@ -38,7 +38,8 @@ try {
     {
 
         $router->post('register', 'AuthController@register');
-         $router->post('login', 'AuthController@login');  
+        $router->post('login', 'AuthController@login');  
+        $router->post('/clientes/registrarCliente','ClienteController@registrarCliente');
     }); 
  /*    
     $router->post('/proveedor/login','ProveedorController@login');

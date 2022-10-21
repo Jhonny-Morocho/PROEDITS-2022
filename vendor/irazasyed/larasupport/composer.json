@@ -1,0 +1,44 @@
+{
+  "name": "irazasyed/larasupport",
+  "type": "library",
+  "description": "Adds Laravel Package Support in Lumen.",
+  "keywords": [
+    "laravel",
+    "laravel lumen support",
+    "lumen packages",
+    "laravel packages",
+    "lumen support",
+    "larasupport",
+    "laravel package support"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Irfaq Syed",
+      "email": "syed+gh@lukonet.com",
+      "homepage": "https://github.com/irazasyed"
+    }
+  ],
+  "require": {
+    "league/flysystem": "^1.0"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Irazasyed\\Larasupport\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
