@@ -27,5 +27,9 @@ Route::put('usuarios/{id}',[UsuarioController::class,'update']);
 Route::post('usuarios',[UsuarioController::class,'store']);
 
 
-Route::get('proveedores',[ProveedorController::class,'index']);
+
 Route::post('proveedores',[ProveedorController::class,'store']);
+
+
+/* Route::get('proveedores',[ProveedorController::class,'index']);
+Route::post('proveedores',[ProveedorController::class,'store']); */

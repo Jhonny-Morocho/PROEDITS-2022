@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Proveedor;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 class ProveedorController extends Controller
 {
     /**
@@ -28,14 +30,26 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-
-        $usuario=User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'api_token' => Str::random(60),
-        ]);
-        return $usuario;
+        $proveedor=null;
+        try {
+            $proveedor=Proveedor::where('correo',$request['correo'])->where('estado','1')->first();
+            if($proveedor!=null){
+                return response()->json(["message"=>"Ya existe un usuario con el mismo correo"],400);
+            }
+            $createProveedor=Proveedor::create([
+                'nombre' => $request['nombre'],
+                'apellido' => $request['apellido'],
+                'apodo' => $request['apodo'],
+                'correo' => $request['correo'],
+                'password' => Hash::make($request['password']),
+                'img' => $request['img'],
+                'estado' => $request['estado'],
+                'fecha' => Carbon::now()
+            ]);
+            return response()->json(["message"=>'success','data'=>$createProveedor],201);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$proveedor],400);
+        }
 
     }
 
