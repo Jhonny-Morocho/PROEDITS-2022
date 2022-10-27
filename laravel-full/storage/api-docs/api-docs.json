@@ -1,0 +1,28 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi documentación de Enterprises",
+        "description": "L5 Swagger OpenApi description para enterprises.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/enterprises": {
+            "get": {
+                "tags": [
+                    "enterprises"
+                ],
+                "summary": "Mostrar el listado de empresas",
+                "description": "Display a listing of the resource.\nMostramos el listado de los regitros solicitados.",
+                "operationId": "5ed986e1a505ed7e1197c5d352849235",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las empresas."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
