@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Proveedor;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
-class ProveedorController extends Controller
+use App\Models\Genero;
+class GeneroController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +15,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-
-        return User::get();
+        //
     }
 
     /**
@@ -30,29 +26,21 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        $proveedor=null;
+        $genero=null;
         try {
-            $proveedor=Proveedor::where('correo',$request['correo'])->where('estado','1')->first();
-            if($proveedor!=null){
-                return response()->json(["message"=>"Ya existe un usuario con el mismo correo"],400);
+            $genero=Genero::where('genero',$request['genero'])->where('estado',1)->first();
+            if($genero!=null){
+                return response()->json(["message"=>"Ya existe un genero con el mismo nombre"],400);
             }
-            $createProveedor=Proveedor::create([
-                'nombre' => $request['nombre'],
-                'apellido' => $request['apellido'],
-                'apodo' => $request['apodo'],
-                'correo' => $request['correo'],
-                'password' => Hash::make($request['password']),
-                'img' => $request['img'],
-                'estado' => $request['estado'],
+            $createGenero=Genero::create([
+                'genero' => $request['genero'],
+                'estado' => 1,
                 'fecha' => Carbon::now()
             ]);
-            // Asignación del rol
-            $createProveedor->assignRole('Administrator');
-            return response()->json(["message"=>'success','data'=>$createProveedor],201);
+            return response()->json(["message"=>'success','data'=>$createGenero],201);
         } catch (\Throwable $th) {
-            return response()->json(["message"=>$th->getMessage(),'data'=>$proveedor],400);
+            return response()->json(["message"=>$th->getMessage(),'data'=>$genero],400);
         }
-
     }
 
     /**
