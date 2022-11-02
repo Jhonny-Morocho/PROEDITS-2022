@@ -31,6 +31,8 @@ Route::post('usuarios',[UsuarioController::class,'store']);
 
 Route::post('proveedores',[ProveedorController::class,'store']);
 
+
+//Generos
 Route::get('generos',[GeneroController::class,'index']);
 Route::post('generos',[GeneroController::class,'store']);
 Route::get('generos/{id}',[GeneroController::class,'show']);
