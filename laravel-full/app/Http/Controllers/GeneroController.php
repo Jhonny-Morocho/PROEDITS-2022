@@ -15,7 +15,13 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        $generos=null;
+        try {
+            $generos=Genero::where('estado',1)->get();
+            return response()->json(["message"=>'success','data'=>$generos],201);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$generos],400);
+        }
     }
 
     /**
@@ -34,7 +40,7 @@ class GeneroController extends Controller
             }
             $createGenero=Genero::create([
                 'genero' => $request['genero'],
-                'estado' => 1,
+                'estado' => $request['estado'],
                 'fecha' => Carbon::now()
             ]);
             return response()->json(["message"=>'success','data'=>$createGenero],201);
@@ -51,7 +57,17 @@ class GeneroController extends Controller
      */
     public function show($id)
     {
-        //
+        $genero=null;
+        try {
+            $genero=Genero::where('id',$id)->where('estado',1)->first();
+            if($genero!=null){
+                return response()->json(["message"=>'success','data'=>$genero],201);
+                
+            }
+            return response()->json(["message"=>"Genero no encontrado"],400);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$genero],400);
+        }
     }
 
     /**
@@ -63,7 +79,23 @@ class GeneroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $genero=null;
+        try {
+            $generoExiste=Genero::where('id',$id)->where('estado',1)->first();
+            if($generoExiste==null){
+                return response()->json(["message"=>"Genero no encontrado"],400);
+            }
+            //actualizo el genero
+            $genero=Genero::where('id',$id)->update(
+                array('genero'=>$request['genero'],'fecha' => Carbon::now())
+            );
+            if($genero==null){
+                return response()->json(["message"=>"No se puede actulizar el genero"],400);
+            }
+            return response()->json(["message"=>'success','data'=>$genero],200);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$genero],400);
+        }
     }
 
     /**
@@ -74,6 +106,22 @@ class GeneroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $genero=null;
+        try {
+            $generoExiste=Genero::where('id',$id)->where('estado',1)->first();
+            if($generoExiste==null){
+                return response()->json(["message"=>"Genero no encontrado"],400);
+            }
+            //actualizo el genero
+            $genero=Genero::where('id',$id)->update(
+                array('estado'=>0,'fecha' => Carbon::now())
+            );
+            if($genero==null){
+                return response()->json(["message"=>"No se puede eliminar el genero"],400);
+            }
+            return response()->json(["message"=>'success','data'=>$genero],200);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$genero],400);
+        }
     }
 }
