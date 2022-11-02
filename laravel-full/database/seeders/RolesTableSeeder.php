@@ -16,26 +16,26 @@ class RolesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   //spetter documentacion https://spatie.be/docs/laravel-permission/v3/introduction
         //documentacion https://spatie.be/docs/laravel-permission/v5/advanced-usage/seeding
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'edit articles']);
-        Permission::create(['name' => 'delete articles']);
-        Permission::create(['name' => 'publish articles']);
-        Permission::create(['name' => 'unpublish articles']);
+        Permission::create(['name' => 'edit products']);
+        Permission::create(['name' => 'delete products']);
+        Permission::create(['name' => 'publish products']);
+        Permission::create(['name' => 'unpublish products']);
 
 
         // create roles and assign created permissions
         // this can be done as separate statements
         $role = Role::create(['name' => 'writer']);
-        $role->givePermissionTo('edit articles');
+        $role->givePermissionTo('edit products');
 
         // or may be done by chaining
         $role = Role::create(['name' => 'moderator'])
-            ->givePermissionTo(['publish articles', 'unpublish articles']);
+            ->givePermissionTo(['publish products', 'unpublish products']);
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
