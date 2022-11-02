@@ -18,7 +18,7 @@ class GeneroController extends Controller
         $generos=null;
         try {
             $generos=Genero::where('estado',1)->get();
-            return response()->json(["message"=>'success','data'=>$generos],201);
+            return response()->json(["message"=>'success','data'=>$generos],200);
         } catch (\Throwable $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>$generos],400);
         }
