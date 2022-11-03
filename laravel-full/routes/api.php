@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\RolePermisoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,3 +41,12 @@ Route::post('generos',[GeneroController::class,'store']);
 Route::get('generos/{id}',[GeneroController::class,'show']);
 Route::put('generos/{id}',[GeneroController::class,'update']);
 Route::delete('generos/{id}',[GeneroController::class,'destroy']);
+
+//Roles
+Route::get('roles',[RolController::class,'index']);
+
+//Permisos
+Route::get('permisos',[PermisoController::class,'index']);
+
+//RolesPermisos
+Route::get('rolespermisos',[RolePermisoController::class,'index']);
