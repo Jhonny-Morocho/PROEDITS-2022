@@ -8,6 +8,7 @@ use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RolePermisoController;
+use App\Http\Controllers\ProveedorRolController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,3 +54,8 @@ Route::get('permisos',[PermisoController::class,'index']);
 
 //RolesPermisos
 Route::get('rolespermisos',[RolePermisoController::class,'index']);
+
+//ProveedorRol
+Route::get('proveedoresRoles',[ProveedorRolController::class,'index']);
+Route::post('proveedoresRoles',[ProveedorRolController::class,'store']);
+Route::put('proveedoresRoles/{id}',[ProveedorRolController::class,'update']);

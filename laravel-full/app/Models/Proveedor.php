@@ -17,6 +17,7 @@ class Proveedor extends Authenticatable
         'created_at',
         'updated_at'
     ];
+    protected $hidden = ['password'];
     public function guardName(){
         return "web";
     }

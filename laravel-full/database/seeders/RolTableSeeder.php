@@ -30,11 +30,11 @@ class RolTableSeeder extends Seeder
 
         // create roles and assign created permissions
         // this can be done as separate statements
-        $role = Role::create(['name' => 'writer']);
+        $role = Role::create(['name' => 'escritor']);
         $role->givePermissionTo('edit products');
 
         // or may be done by chaining
-        $role = Role::create(['name' => 'moderator'])
+        $role = Role::create(['name' => 'moderador'])
             ->givePermissionTo(['publish products', 'unpublish products']);
 
         $role = Role::create(['name' => 'super-admin']);

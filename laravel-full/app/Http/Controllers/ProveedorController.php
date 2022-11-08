@@ -46,8 +46,7 @@ class ProveedorController extends Controller
                 'estado' => $request['estado'],
                 'fecha' => Carbon::now()
             ]);
-            // Asignación del rol
-            $createProveedor->assignRole('Administrator');
+
             return response()->json(["message"=>'success','data'=>$createProveedor],201);
         } catch (\Throwable $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>$proveedor],400);
@@ -73,9 +72,11 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //asignar los rols a un usuario
+    public function update(Request $request,Proveedor $proveedor)
     {
-        //
+        
+
     }
 
     /**
