@@ -44,7 +44,10 @@ Route::delete('generos/{id}',[GeneroController::class,'destroy']);
 
 //Roles
 Route::get('roles',[RolController::class,'index']);
-
+Route::post('roles',[RolController::class,'store']);
+Route::get('roles/{id}',[RolController::class,'show']);
+Route::put('roles/{id}',[RolController::class,'update']);
+Route::delete('roles/{id}',[RolController::class,'destroy']);
 //Permisos
 Route::get('permisos',[PermisoController::class,'index']);
 

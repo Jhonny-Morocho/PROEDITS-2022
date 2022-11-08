@@ -30,7 +30,19 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rol=null;
+        try {
+            $rol=Role::where('name',$request['name'])->first();
+            if($rol!=null){
+                return response()->json(["message"=>"Ya existe un rol con el mismo nombre"],400);
+            }
+            $createRol=Role::create([
+                'name' => $request['name']
+            ]);
+            return response()->json(["message"=>'success','data'=>$createRol],201);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$rol],400);
+        }
     }
 
     /**
@@ -41,7 +53,16 @@ class RolController extends Controller
      */
     public function show($id)
     {
-        //
+        $rol=null;
+        try {
+            $rol=Role::where('id',$id)->first();
+            if($rol!=null){
+                return response()->json(["message"=>'success','data'=>$rol],200);
+            }
+            return response()->json(["message"=>"Rol no encontrado"],400);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$rol],400);
+        }
     }
 
     /**
@@ -53,7 +74,23 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rol=null;
+        try {
+            $rolExiste=Role::where('id',$id)->first();
+            if($rolExiste==null){
+                return response()->json(["message"=>"Rol no encontrado"],400);
+            }
+            //actualizo el rol
+            $rol=Role::where('id',$id)->update(
+                array('name'=>$request['name'])
+            );
+            if($rol==null){
+                return response()->json(["message"=>"No se puede actulizar el rol"],400);
+            }
+            return response()->json(["message"=>'success','data'=>$rol],200);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$rol],400);
+        }
     }
 
     /**
@@ -64,6 +101,20 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role=null;
+        try {
+            $roleExiste=Role::where('id',$id)->first();
+            if($roleExiste==null){
+                return response()->json(["message"=>"Genero no encontrado"],400);
+            }
+            //actualizo el genero
+            $role=Role::where('id',$id)->delete();
+            if($role==null){
+                return response()->json(["message"=>"No se puede eliminar el rol"],400);
+            }
+            return response()->json(["message"=>'success','data'=>$role],200);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>$role],400);
+        }
     }
 }
