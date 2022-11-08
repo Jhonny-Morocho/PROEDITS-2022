@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'proveedors',
+        ],
+
     ],
 
     /*
@@ -64,11 +69,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+/* 
+         'proveedors' => [
+             'driver' => 'eloquent',
+             'table' => App\Models\Proveedor::class,
+         ], */
     ],
 
     /*

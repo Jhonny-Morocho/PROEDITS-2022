@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\GeneroController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RolePermisoController;
 use App\Http\Controllers\ProveedorRolController;
+use App\Http\Controllers\ProveedorAuth;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,7 +27,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//token jwt
+/* Route::group(['middleware' => ['jwt.verify']], function() {
+    
+}); */
+Route::post('generos',[GeneroController::class,'store']);
+Route::get('generos/{id}',[GeneroController::class,'show']);
+Route::put('generos/{id}',[GeneroController::class,'update']);
+Route::delete('generos/{id}',[GeneroController::class,'destroy']);
+//Generos
+Route::get('generos',[GeneroController::class,'index']);
 
 Route::get('usuarios',[UsuarioController::class,'index']);
 Route::get('usuarios/{id}',[UsuarioController::class,'show']);
@@ -36,12 +48,7 @@ Route::post('usuarios',[UsuarioController::class,'store']);
 Route::post('proveedores',[ProveedorController::class,'store']);
 
 
-//Generos
-Route::get('generos',[GeneroController::class,'index']);
-Route::post('generos',[GeneroController::class,'store']);
-Route::get('generos/{id}',[GeneroController::class,'show']);
-Route::put('generos/{id}',[GeneroController::class,'update']);
-Route::delete('generos/{id}',[GeneroController::class,'destroy']);
+
 
 //Roles
 Route::get('roles',[RolController::class,'index']);
@@ -58,4 +65,10 @@ Route::get('rolespermisos',[RolePermisoController::class,'index']);
 //ProveedorRol
 Route::get('proveedoresRoles',[ProveedorRolController::class,'index']);
 Route::post('proveedoresRoles',[ProveedorRolController::class,'store']);
-Route::put('proveedoresRoles/{id}',[ProveedorRolController::class,'update']);
+//Route::put('proveedoresRoles/{id}',[ProveedorRolController::class,'update']);
+
+//ProveedorAuth
+Route::post('proveedoresAuth',[ProveedorAuth::class,'store']);
+
+//AUHT
+Route::post('auth/login',[AuthController::class,'login']);
