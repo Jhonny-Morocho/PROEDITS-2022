@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Proveedor;
 //jwt
  use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash; 
-use App\Models\Proveedor;
+//use Illuminate\Support\Facades\Hash;  
+//jwt2
+use Tymon\JWTAuth\Exceptions\JWTException;
+use JWTAuth;
 class AuthController extends Controller
 {
     public function __construct()
@@ -24,19 +28,18 @@ class AuthController extends Controller
                 'correo' => 'required|string|email',
                 'password' => 'required|string',
             ]);
-    
+            //Send failed response if request is not valid
             $credentials = $request->only('correo', 'password');
-            $token = Auth::attempt($credentials);
-
+            $token = JWTAuth::attempt($credentials);//creat token
+            //$token = Auth::attempt($credentials);
             if (!$token) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Unauthorized',
                 ], 401);
-            }
+            } 
             $user = Auth::user();
-        /*     $token = $user->createToken('Your Token Name');
-            return $this->respondWithToken($token); */
+
             return response()->json([
                     'status' => 'success',
                     'user' => $user,
@@ -44,15 +47,18 @@ class AuthController extends Controller
                         'token' => $token,
                         'type' => 'bearer',
                     ]
-                ]); 
+            ]);  
 
 
         } catch (\Throwable $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
         }
-
+        catch (JWTException $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
+        }
 
     }
+
     public function logout()
     {
         Auth::logout();

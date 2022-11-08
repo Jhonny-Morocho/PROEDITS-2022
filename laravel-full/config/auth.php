@@ -44,6 +44,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'proveedors',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'proveedors',
+            'hash' => true,
+        ],
 
     ],
 
@@ -69,11 +74,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-/* 
+
          'proveedors' => [
              'driver' => 'eloquent',
              'table' => App\Models\Proveedor::class,
-         ], */
+         ], 
     ],
 
     /*
