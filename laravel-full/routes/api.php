@@ -68,4 +68,5 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 });
 
 //AUHT
-Route::post('auth/login',[AuthController::class,'login']);
+Route::post('auth/loginProveedor',[AuthController::class,'loginProveedor']);
+Route::post('auth/registrarCliente',[AuthController::class,'registrarCliente']);

@@ -17,10 +17,10 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['loginProveedor','registrarCliente']]);
     }
     
-    public function login(Request $request)
+    public function loginProveedor(Request $request)
     {
 
         try {
@@ -69,6 +69,18 @@ class AuthController extends Controller
         }
 
     }
+    public function registrarCliente(Request $request){
+        $validator=$request->validate([
+            'nombre' => 'required|string|max:50|min:3',
+            'apellido' => 'required|string|max:50|min:3',
+            'correo' => 'required|string|email',
+            'estado' => 'required|numeric|min:0',
+            'password' => 'required|string|max:50|min:3',
+        ]);
+        return $request;
+        //$existeCliente=Cliente::where("correo",$request['correo'])->first();
+    }
+    
 /* 
     public function logout()
     {
