@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Proveedor;
+use App\Models\Cliente;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 //jwt
  use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Hash;  
@@ -17,7 +20,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['loginProveedor','registrarCliente']]);
+        $this->middleware('auth:api', ['except' => ['loginProveedor','registrarCliente','loginCliente']]);
     }
     
     public function loginProveedor(Request $request)
@@ -31,8 +34,8 @@ class AuthController extends Controller
             ]);
             //Send failed response if request is not valid
             $credentials = $request->only('correo', 'password');
-            $token = JWTAuth::attempt($credentials );//creat token
-            //$token = Auth::attempt($credentials);
+            //$token = JWTAuth::attempt($credentials );//creat token
+            $token = JWTAuth::attempt($credentials);
             if (!$token) {
                 return response()->json([
                     'status' => 'error',
@@ -69,16 +72,26 @@ class AuthController extends Controller
         }
 
     }
+    public function loginCliente(Request $request)
+    {
+
+        try {
+            return Repositorio\Auth\AuthRepositorio::loginCliente($request);
+         }
+         catch (\Throwable $th) {
+             return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
+         }
+ 
+
+    }
     public function registrarCliente(Request $request){
-        $validator=$request->validate([
-            'nombre' => 'required|string|max:50|min:3',
-            'apellido' => 'required|string|max:50|min:3',
-            'correo' => 'required|string|email',
-            'estado' => 'required|numeric|min:0',
-            'password' => 'required|string|max:50|min:3',
-        ]);
-        return $request;
-        //$existeCliente=Cliente::where("correo",$request['correo'])->first();
+        try {
+           return Repositorio\Auth\AuthRepositorio::registrarCliente($request);
+        }
+        catch (\Throwable $th) {
+            return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
+        }
+
     }
     
 /* 

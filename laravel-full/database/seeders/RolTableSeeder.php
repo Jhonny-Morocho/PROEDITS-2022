@@ -40,5 +40,10 @@ class RolTableSeeder extends Seeder
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
 
+        //cliente
+        $role = Role::create(['name' => 'cliente']);
+        Permission::create(['name' => 'comprar']);
+        $role->givePermissionTo(Permission::all());
+
     }
 }

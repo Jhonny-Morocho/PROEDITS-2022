@@ -26,9 +26,6 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::group(['middleware' => ['jwt.verify']], function() {
-//Generos
     Route::get('generos',[GeneroController::class,'index']);
     Route::post('generos',[GeneroController::class,'store']);
     Route::get('generos/{id}',[GeneroController::class,'show']);
@@ -65,8 +62,12 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     
     //ProveedorAuth
     Route::post('proveedoresAuth',[ProveedorAuth::class,'store']);
+Route::group(['middleware' => ['jwt.verify']], function() {
+//Generos
+
 });
 
 //AUHT
 Route::post('auth/loginProveedor',[AuthController::class,'loginProveedor']);
+Route::post('auth/loginCliente',[AuthController::class,'loginCliente']);
 Route::post('auth/registrarCliente',[AuthController::class,'registrarCliente']);

@@ -21,29 +21,6 @@ class Proveedor extends Model
         'updated_at'
     ];
     protected $hidden = ['password'];
-    /* public function guardName(){
-        return "api";
-    } */
-    //jwt
-
-       /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-/*     public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    } */
-
-      /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-  /*   public function getJWTCustomClaims()
-    {
-        return [];
-    } */
+    
     
 }

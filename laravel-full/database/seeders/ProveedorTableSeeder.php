@@ -30,6 +30,8 @@ class ProveedorTableSeeder extends Seeder
             'fecha' => Carbon::now()
         ]);
         $proveedor->assignRole('super-admin');
+
+ 
         //$proveedor->assignRole('super-admin');
     }
 }
