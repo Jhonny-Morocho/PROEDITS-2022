@@ -83,9 +83,10 @@ class AuthRepositorio {
 
             if (!$token = auth()->guard('clienteApi')->attempt($credenciales)) {
                 return response()->json([
-                    'status' => 'error',
                     'message' => 'Unauthorized',
+                    'data'=>array('message'=>'Error al generar token','authorisation'=>'Unauthorized')
                 ], 401);
+
             }
             //creamos el token
             $clienteRol= auth()->guard('clienteApi')->user($credenciales);
@@ -113,6 +114,54 @@ class AuthRepositorio {
         }
         catch (JWTException $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
+        }
+    }
+    public static function loginClienteApiSocial($request){
+        try {
+            $credenciales = $request->only('correo','password');
+            $validator = Validator::make($credenciales, [
+                'correo' => 'required|string|email',
+                'password' => 'required|string|max:50|min:1'
+            ]);
+            
+            if ($validator->fails()) {
+                return response()->json(['message' => "Error en validación de información",'data'=>$validator->messages()], 401);
+            }
+        
+            $cliente=Cliente::where('correo',$request['correo'])->first();
+            if($cliente==null){
+                return response()->json(["message"=>"Usuario no existe",'data'=>$cliente],200);
+            }
+        
+            if (!$token = auth()->guard('clienteApi')->attempt($credenciales)) {
+                return response()->json([
+                    'message' => 'Unauthorized',
+                    'data'=>array('message'=>'Error al generar token','authorisation'=>'Unauthorized')
+                ], 401);
+            }
+            //creamos el token
+            $clienteRol= auth()->guard('clienteApi')->user($credenciales);
+            $payload = JWTFactory::clienteRol($clienteRol)->make();
+            $token = JWTAuth::encode($payload);
+
+            //envio un objeto usuario temp
+            $auxCliente=new Cliente();
+            $auxCliente->nombre=$clienteRol->nombre;
+            $auxCliente->apellido=$clienteRol->apellido;
+            $auxCliente->correo=$clienteRol->correo;
+            return response()->json([
+                'message' => 'success',
+                'data' => array(
+                    'usuario'=>$auxCliente,  
+                    'authorisation' => [
+                        'token' => $token->get(),
+                        'type' => 'bearer',
+                    ]
+                ),
+              
+            ],201);
+        } catch (\Throwable $th) {
+            return response()->json(["sms"=>$th->getMessage(),"Siglas"=>"ERROR"]);
         }
     }
 
