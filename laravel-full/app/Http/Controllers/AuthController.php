@@ -31,7 +31,6 @@ class AuthController extends Controller
             ]);
             //Send failed response if request is not valid
             $credentials = $request->only('correo', 'password');
-            $customClaims = ['foo' => 'bar', 'baz' => 'bob'];
             $token = JWTAuth::attempt($credentials,$customClaims );//creat token
             //$token = Auth::attempt($credentials);
             if (!$token) {
