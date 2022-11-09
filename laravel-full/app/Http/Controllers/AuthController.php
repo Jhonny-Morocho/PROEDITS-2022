@@ -12,6 +12,7 @@ use App\Models\Proveedor;
 //jwt2
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
+use JWTFactory;
 class AuthController extends Controller
 {
     public function __construct()
@@ -30,7 +31,8 @@ class AuthController extends Controller
             ]);
             //Send failed response if request is not valid
             $credentials = $request->only('correo', 'password');
-            $token = JWTAuth::attempt($credentials);//creat token
+            $customClaims = ['foo' => 'bar', 'baz' => 'bob'];
+            $token = JWTAuth::attempt($credentials,$customClaims );//creat token
             //$token = Auth::attempt($credentials);
             if (!$token) {
                 return response()->json([
@@ -39,12 +41,23 @@ class AuthController extends Controller
                 ], 401);
             } 
             $user = Auth::user();
+            //$rolUsuario = $user->with('roles')->first(); 
+            $proveedorRol= Proveedor::with('roles')->where('id',$user->id)->get();
+            $payload = JWTFactory::proveedorRol($proveedorRol)->make();
+            $token = JWTAuth::encode($payload);
 
+            //envio un objeto usuario temp
+            $auxProveedor=new Proveedor();
+            $auxProveedor->nombre=$user->nombre;
+            $auxProveedor->apellido=$user->apellido;
+            $auxProveedor->apodo=$user->apodo;
+            $auxProveedor->img=$user->img;
+            $auxProveedor->correo=$user->correo;
             return response()->json([
                     'status' => 'success',
-                    'user' => $user,
+                    'user' => $auxProveedor,
                     'authorisation' => [
-                        'token' => $token,
+                        'token' => $token->get(),
                         'type' => 'bearer',
                     ]
             ]);  
