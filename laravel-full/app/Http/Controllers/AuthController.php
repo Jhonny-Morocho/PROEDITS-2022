@@ -41,7 +41,6 @@ class AuthController extends Controller
                 ], 401);
             } 
             $user = Auth::user();
-            //$rolUsuario = $user->with('roles')->first(); 
             $proveedorRol= Proveedor::with('roles')->where('id',$user->id)->get();
             $payload = JWTFactory::proveedorRol($proveedorRol)->make();
             $token = JWTAuth::encode($payload);
@@ -60,7 +59,7 @@ class AuthController extends Controller
                         'token' => $token->get(),
                         'type' => 'bearer',
                     ]
-            ]);  
+            ],201);  
 
 
         } catch (\Throwable $th) {
@@ -71,7 +70,7 @@ class AuthController extends Controller
         }
 
     }
-
+/* 
     public function logout()
     {
         Auth::logout();
@@ -90,5 +89,5 @@ class AuthController extends Controller
                 'type' => 'bearer',
             ]
         ]);
-    }
+    } */
 }
