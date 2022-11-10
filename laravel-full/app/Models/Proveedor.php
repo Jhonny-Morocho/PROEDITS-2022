@@ -21,6 +21,10 @@ class Proveedor extends Model
         'updated_at'
     ];
     protected $hidden = ['password'];
-    
-    
+    //
+    public function guardName(){
+        return "web";
+    }
+    //roles
+ 
 }

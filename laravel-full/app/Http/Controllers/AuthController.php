@@ -43,7 +43,7 @@ class AuthController extends Controller
                 ], 401);
             } 
             $user = Auth::user();
-            $proveedorRol= Proveedor::with('roles')->where('id',$user->id)->get();
+            $proveedorRol= Proveedor::with('roles')->where('id',$user->id)->first();
             $payload = JWTFactory::proveedorRol($proveedorRol)->make();
             $token = JWTAuth::encode($payload);
 

@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+///roles
 
 class User extends Authenticatable implements JWTSubject 
-{
+{   
     use HasFactory, Notifiable;
     protected $table = 'proveedors';
     /**
@@ -62,4 +63,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
+ 
 }

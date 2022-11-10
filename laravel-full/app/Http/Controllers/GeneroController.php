@@ -13,10 +13,17 @@ class GeneroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        //$this->middleware('jwt.verify:escritor');
+        //$this->middleware('role:escritor');
+    }
+
     public function index()
     {
         $generos=null;
         try {
+        
             $generos=Genero::where('estado',1)->get();
             return response()->json(["message"=>'success','data'=>$generos],200);
         } catch (\Throwable $th) {
