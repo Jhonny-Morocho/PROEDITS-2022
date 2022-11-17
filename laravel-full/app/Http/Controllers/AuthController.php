@@ -20,7 +20,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['loginProveedor','registrarCliente','loginCliente','loginClienteApiSocial']]);
+        $this->middleware('auth:api', ['except' => ['loginProveedor']]);
     }
     
     public function loginProveedor(Request $request)
@@ -72,32 +72,9 @@ class AuthController extends Controller
         }
 
     }
-    public function loginCliente(Request $request)
-    {
-        try {
-            return Repositorio\Auth\AuthRepositorio::loginCliente($request);
-         }
-         catch (\Throwable $th) {
-             return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
-         }
-    }
-    public function loginClienteApiSocial(Request $request){
-        try {
-            return Repositorio\Auth\AuthRepositorio::loginClienteApiSocial($request);
-         }
-         catch (\Throwable $th) {
-             return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
-         }
-    }
-    public function registrarCliente(Request $request){
-        try {
-           return Repositorio\Auth\AuthRepositorio::registrarCliente($request);
-        }
-        catch (\Throwable $th) {
-            return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
-        }
 
-    }
+
+
     
 /* 
     public function logout()

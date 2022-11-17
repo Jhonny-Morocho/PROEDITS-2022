@@ -2,19 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 class Cliente extends  Authenticatable implements JWTSubject 
 {
-    use HasFactory,Notifiable;
+    use Notifiable,HasRoles;
     protected $guarded=[
         'id',
         'created_at',
         'updated_at'
     ];
+    
     protected $hidden = ['password'];
         /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -34,4 +36,7 @@ class Cliente extends  Authenticatable implements JWTSubject
     {
         return [];
     }
+     public function guardName(){
+        return "web";
+    } 
 }

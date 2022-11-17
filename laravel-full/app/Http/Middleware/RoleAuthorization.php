@@ -5,12 +5,13 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\Proveedor;
+use Error;
 //jwt
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-
+//decodificar token
 class RoleAuthorization
 {
     /**
@@ -26,8 +27,15 @@ class RoleAuthorization
     {
         try {
             //Access token from the request 
+            //dd($request->headers);
+            //controlar q el token que viene de la cabezera sea de un usuario proveedor
             $token = JWTAuth::parseToken();
-            //Try authenticating user       
+            $payLoad = JWTAuth::getPayload($token)->toArray();
+            //reviar si es un usuario cliente//debe ser admin
+            if(empty($payLoad['proveedorRol'])){
+                throw new JWTException;
+            }
+            //todo ok     
             $user = $token->authenticate();
             $proveedorRol= Proveedor::with('roles')->where('id',$user->id)->first();
         } catch (TokenExpiredException $e) {

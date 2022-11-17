@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
          ]); */
          $this->call(RolTableSeeder::class);
          $this->call(ProveedorTableSeeder::class);
+         $this->call(ClienteTableSeeder::class);
     }
 }

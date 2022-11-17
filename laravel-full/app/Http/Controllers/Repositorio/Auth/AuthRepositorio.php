@@ -11,7 +11,12 @@ use Carbon\Carbon;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
 use JWTFactory;
+
+
 class AuthRepositorio {
+    //Auth Laravel 9
+
+
     //crear tokens para diferentes sesiones
     //https://medium.com/@niravdchavda/multiple-authentication-guards-for-laravel-restful-apis-jwt-617dfa24368d
     public static function registrarCliente($request){
@@ -81,7 +86,7 @@ class AuthRepositorio {
                 return response()->json(["message"=>"Password incorrecto",'data'=>null],200);
             }
 
-            if (!$token = auth()->guard('clienteApi')->attempt($credenciales)) {
+            if (!$token = auth()->guard('tienda')->attempt($credenciales)) {
                 return response()->json([
                     'message' => 'Unauthorized',
                     'data'=>array('message'=>'Error al generar token','authorisation'=>'Unauthorized')
@@ -89,7 +94,7 @@ class AuthRepositorio {
 
             }
             //creamos el token
-            $clienteRol= auth()->guard('clienteApi')->user($credenciales);
+            $clienteRol= auth()->guard('tienda')->user($credenciales);
             $payload = JWTFactory::clienteRol($clienteRol)->make();
             $token = JWTAuth::encode($payload);
 

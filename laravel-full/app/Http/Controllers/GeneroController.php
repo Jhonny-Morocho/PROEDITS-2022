@@ -13,11 +13,7 @@ class GeneroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        //$this->middleware('jwt.verify:escritor');
-        //$this->middleware('role:escritor');
-    }
+  
 
     public function index()
     {

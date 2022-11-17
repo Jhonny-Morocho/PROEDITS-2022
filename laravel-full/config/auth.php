@@ -36,15 +36,15 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'web' => [//Laravel default guard name
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'api' => [
+        'api' => [//Our Custom guard name "admin"
             'driver' => 'jwt',
-            'provider' => 'proveedors',
+            'provider' => 'proveedors',// Our authenticate table/model name
         ],
-        'clienteApi' => [
+        'tienda' => [
             'driver' => 'jwt',
             'provider' => 'clientes',
         ]
@@ -106,6 +106,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'clientes' => [  // And here also
+            'provider' => 'clientes',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ]
     ],
 
     /*
