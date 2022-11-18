@@ -14,6 +14,7 @@ use App\Http\Controllers\ProveedorAuth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthTiendaController;
 use App\Http\Controllers\ClienteRolController;
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,6 +39,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('generos/{id}',[GeneroController::class,'show'])->middleware('can:super-admin,moderador,escritor');
     Route::delete('generos/{id}',[GeneroController::class,'destroy'])->middleware('can:super-admin');
     Route::put('generos/{id}',[GeneroController::class,'update'])->middleware('can:super-admin');
+
+    //productos
+    Route::get('productos',[ProductoController::class,'index'])->middleware('can:super-admin,moderador,escritor');
+    Route::post('productos',[ProductoController::class,'store'])->middleware('can:super-admin');
+    Route::get('productos/{id}',[ProductoController::class,'show'])->middleware('can:super-admin,moderador,escritor');
+    Route::delete('productos/{id}',[ProductoController::class,'destroy'])->middleware('can:super-admin');
+    Route::put('productos/{id}',[ProductoController::class,'update'])->middleware('can:super-admin');
     
     
     //Roles

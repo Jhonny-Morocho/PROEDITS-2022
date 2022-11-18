@@ -26,6 +26,7 @@ class RoleAuthorization
     public function handle(Request $request, Closure $next,...$roles)
     {
         try {
+            //https://jwt-auth.readthedocs.io/en/develop/
             //Access token from the request 
             //dd($request->headers);
             //controlar q el token que viene de la cabezera sea de un usuario proveedor

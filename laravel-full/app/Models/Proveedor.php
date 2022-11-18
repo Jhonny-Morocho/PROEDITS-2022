@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 //jwt
 //use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 //use Illuminate\Notifications\Notifiable; 
-
+use App\Models\Producto;
 class Proveedor extends Model
 {
     use HasRoles;
@@ -26,5 +26,11 @@ class Proveedor extends Model
         return "web";
     }
     //roles
- 
+    public function producto()
+    {
+        return $this->belongTo(Producto::class);
+    } 
+ /*    public function producto(){
+        return $this->hasMany('App\Models\Producto','fk_producto');
+    } */
 }
