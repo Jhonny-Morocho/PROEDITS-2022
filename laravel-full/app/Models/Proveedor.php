@@ -20,17 +20,15 @@ class Proveedor extends Model
         'created_at',
         'updated_at'
     ];
+    
     protected $hidden = ['password'];
     //
     public function guardName(){
         return "web";
     }
     //roles
-    public function producto()
-    {
-        return $this->belongTo(Producto::class);
+ 
+    public function producto(){
+        return $this->hasMany(Producto::class,'fk_producto');
     } 
- /*    public function producto(){
-        return $this->hasMany('App\Models\Producto','fk_producto');
-    } */
 }

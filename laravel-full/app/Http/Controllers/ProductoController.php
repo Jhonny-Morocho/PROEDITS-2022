@@ -24,12 +24,16 @@ class ProductoController extends Controller
                                     'numElementos',
                                     'fechaIncio',
                                     'fechaFin',
+                                    'buscar',
+                                    'page',
                                     'caratula');
             $validator = Validator::make($data, [
                 'precioInicio' => 'required|numeric',
                 'precioFin' => 'required|numeric',
                 'genero' => 'required|numeric',
                 'proveedor'=>'required|string',
+                'page'=>'required|numeric',
+                'buscar'=>'string|max:100|nullable',
                 'numElementos' => 'required|numeric',
                 'fechaIncio' => 'required|string|date',
                 'fechaFin' => 'required|string|date',
@@ -58,21 +62,23 @@ class ProductoController extends Controller
             $data = $request->only('fk_genero', 
                                     'fk_proveedor', 
                                     'precio',
-                                    'url_descarga',
-                                    'url_directorio',
+                                    'archivo_descarga',
+                                    'archivo_demo',
                                     'estado',
                                     'es_archivo',
-                                    'caratula');
+                                    'caratula',
+                                    'nombre');
                                     
             $validator = Validator::make($data, [
                 'fk_genero' => 'required|numeric|min:1',
                 'fk_proveedor' => 'required|numeric|min:1',
                 'precio' => 'required|numeric|min:1',
-                'url_descarga'=>'required|string',
-                'url_directorio' => 'required|string',
+                'archivo_descarga'=>'required|string',
+                'archivo_demo' => 'required|string',
+                'nombre' => 'required|string',
                 'estado' => 'required|numeric|min:1',
-                'es_archivo' => 'required|numeric|min:1',
-                'caratula' => 'string'
+                'caratula'=>'string|max:100|nullable',
+                'es_archivo' => 'required|numeric|min:1'
             ]);
             
             if ($validator->fails()) {

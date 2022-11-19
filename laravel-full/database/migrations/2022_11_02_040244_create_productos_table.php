@@ -18,11 +18,12 @@ return new class extends Migration
             $table->foreignId('fk_genero')->references('id')->on('generos');
             $table->foreignId('fk_proveedor')->references('id')->on('proveedors');
             $table->decimal('precio',10,2);
-            $table->string('url_descarga');
-            $table->string('url_directorio');
+            $table->string('nombre');
+            $table->string('archivo_demo');
+            $table->string('archivo_descarga');
             $table->integer('estado');
             $table->integer('es_archivo');
-            $table->string('caratula');
+            $table->string('caratula')->nullable();
             $table->dateTime('fecha');
             $table->timestamps();
         });

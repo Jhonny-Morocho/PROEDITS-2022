@@ -14,14 +14,14 @@ class ProductoRepositorio {
         $createProducto=null;
         try {
             $createProducto=Producto::create([
-                'fk_genero ' => $request['fk_genero'],
-                'fk_proveedor ' => $request['fk_proveedor'],
+                'fk_proveedor' => $request['fk_proveedor'],
+                'fk_genero' => $request['fk_genero'],
                 'precio' => $request['precio'],
-                'url_descarga' => $request['url_descarga'],
-                'url_directorio' => $request['url_directorio'],
+                'archivo_descarga' => $request['archivo_descarga'],
+                'archivo_demo' => $request['archivo_demo'],
+                'nombre' => $request['nombre'],
                 'estado' => $request['estado'],
                 'es_archivo' => $request['es_archivo'],
-                'caratula' => $request['caratula'],
                 'fecha' => Carbon::now()
             ]);
             return response()->json(["message"=>'success','data'=>$createProducto],201);
@@ -34,11 +34,11 @@ class ProductoRepositorio {
         $productos=null;
         try {
             $productos=Producto::where('estado',1)
-                        ->where('precio','>=',$request->precioFin)
                         ->where('fk_genero',$request->genero)
                         ->where('fk_proveedor',$request->genero)
+                        ->where('nombre', 'LIKE', "%$request->buscar%")
                         ->whereBetween('precio',[$request->precioInicio,$request->precioFin])
-                        ->whereBetween('created_at',[$request->fechaInicio,$request->fechaFin])
+                        ->orWhereBetween('fecha',[$request->fechaInicio,$request->fechaFin])
                         ->paginate($request->numElementos);
             return response()->json(["message"=>'success','data'=>$productos],200);
         } catch (\Throwable $th) {

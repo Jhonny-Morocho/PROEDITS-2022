@@ -9,13 +9,13 @@ class Genero extends Model
 {
     use HasFactory;
     protected $table="generos";
-    protected $fillable = [
-        'genero',
-        'estado',
-        'fecha'
-    ];
-    public function producto()
-    {
-        return $this->hasOne(Producto::class);
+    protected $guarded=[
+        'id',
+        'created_at',
+        'updated_at'
+    ]; 
+
+    public function producto(){
+        return $this->hasOne(Producto::class,'fk_genero');
     }
 }
