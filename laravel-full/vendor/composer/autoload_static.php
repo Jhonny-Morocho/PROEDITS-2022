@@ -39,6 +39,10 @@ class ComposerStaticInitf77e4baa3117e0f2cf646007b949641c
     );
 
     public static $prefixLengthsPsr4 = array (
+        'w' => 
+        array (
+            'wapmorgan\\Mp3Info\\' => 18,
+        ),
         'v' => 
         array (
             'voku\\' => 5,
@@ -186,6 +190,10 @@ class ComposerStaticInitf77e4baa3117e0f2cf646007b949641c
     );
 
     public static $prefixDirsPsr4 = array (
+        'wapmorgan\\Mp3Info\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wapmorgan/mp3info/src',
+        ),
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
@@ -567,15 +575,20 @@ class ComposerStaticInitf77e4baa3117e0f2cf646007b949641c
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\ArchivoDemoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchivoDemoController.php',
+        'App\\Http\\Controllers\\ArchivoDescargaController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchivoDescargaController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\AuthTiendaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthTiendaController.php',
         'App\\Http\\Controllers\\ClienteRolController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClienteRolController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\GeneroController' => __DIR__ . '/../..' . '/app/Http/Controllers/GeneroController.php',
         'App\\Http\\Controllers\\PermisoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermisoController.php',
+        'App\\Http\\Controllers\\ProductoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductoController.php',
         'App\\Http\\Controllers\\ProveedorController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProveedorController.php',
         'App\\Http\\Controllers\\ProveedorRolController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProveedorRolController.php',
+        'App\\Http\\Controllers\\Repositorio\\ArchivoDemo\\ArchivoDemoRepositorio' => __DIR__ . '/../..' . '/app/Http/Controllers/Repositorio/ArchivoDemo/ArchivoDemoRepositorio.php',
         'App\\Http\\Controllers\\Repositorio\\Auth\\AuthRepositorio' => __DIR__ . '/../..' . '/app/Http/Controllers/Repositorio/Auth/AuthRepositorio.php',
+        'App\\Http\\Controllers\\Repositorio\\Producto\\ProductoRepositorio' => __DIR__ . '/../..' . '/app/Http/Controllers/Repositorio/Producto/ProductoRepositorio.php',
         'App\\Http\\Controllers\\RolController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolController.php',
         'App\\Http\\Controllers\\RolePermisoController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolePermisoController.php',
         'App\\Http\\Controllers\\UsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsuarioController.php',
@@ -593,6 +606,7 @@ class ComposerStaticInitf77e4baa3117e0f2cf646007b949641c
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
         'App\\Models\\Genero' => __DIR__ . '/../..' . '/app/Models/Genero.php',
+        'App\\Models\\Producto' => __DIR__ . '/../..' . '/app/Models/Producto.php',
         'App\\Models\\Proveedor' => __DIR__ . '/../..' . '/app/Models/Proveedor.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -709,6 +723,7 @@ class ComposerStaticInitf77e4baa3117e0f2cf646007b949641c
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\ClienteTableSeeder' => __DIR__ . '/../..' . '/database/seeders/ClienteTableSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\GeneroSeeder' => __DIR__ . '/../..' . '/database/seeders/GeneroSeeder.php',
         'Database\\Seeders\\ProveedorTableSeeder' => __DIR__ . '/../..' . '/database/seeders/ProveedorTableSeeder.php',
         'Database\\Seeders\\RolTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RolTableSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
@@ -6085,6 +6100,7 @@ class ComposerStaticInitf77e4baa3117e0f2cf646007b949641c
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
+        'wapmorgan\\Mp3Info\\Mp3Info' => __DIR__ . '/..' . '/wapmorgan/mp3info/src/Mp3Info.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

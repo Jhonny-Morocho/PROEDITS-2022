@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthTiendaController;
 use App\Http\Controllers\ClienteRolController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ArchivoDemoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,7 +48,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::delete('productos/{id}',[ProductoController::class,'destroy'])->middleware('can:super-admin');
     Route::put('productos/{id}',[ProductoController::class,'update'])->middleware('can:super-admin');
     
-    
+    //archivo demo
+    Route::post('archivo-demo',[ArchivoDemoController::class,'store'])->middleware('can:super-admin,moderador');
+
     //Roles
     Route::get('roles',[RolController::class,'index'])->middleware('can:super-admin');
     Route::post('roles',[RolController::class,'store'])->middleware('can:super-admin');

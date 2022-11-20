@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         L5Swagger\L5SwaggerServiceProvider::class,
 
+
     ],
 
     /*
@@ -213,7 +214,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         //jwt
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
     ])->toArray(),
 
 ];
