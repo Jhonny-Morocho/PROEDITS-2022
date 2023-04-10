@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 //roles
 use Spatie\Permission\Traits\HasRoles;
-//jwt
-//use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-//use Illuminate\Notifications\Notifiable; 
-use App\Models\Producto;
-class Proveedor extends Model
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+class Proveedor extends Authenticatable implements JWTSubject
 {
     use HasRoles;
 
@@ -20,15 +18,24 @@ class Proveedor extends Model
         'created_at',
         'updated_at'
     ];
-    
+
     protected $hidden = ['password'];
     //
-    public function guardName(){
-        return "web";
-    }
+   /*  public function guardName(){
+        return "api";
+    } */
     //roles
- 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+
     public function producto(){
         return $this->hasMany(Producto::class,'fk_producto');
-    } 
+    }
 }

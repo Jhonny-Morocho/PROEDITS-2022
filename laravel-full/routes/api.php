@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('productos/{id}',[ProductoController::class,'show'])->middleware('can:super-admin,moderador,escritor');
     Route::delete('productos/{id}',[ProductoController::class,'destroy'])->middleware('can:super-admin');
     Route::put('productos/{id}',[ProductoController::class,'update'])->middleware('can:super-admin');
-    
+
     //archivo demo
     Route::post('archivo-demo',[ArchivoDemoController::class,'store'])->middleware('can:super-admin,moderador');
 
@@ -59,19 +59,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::delete('roles/{id}',[RolController::class,'destroy'])->middleware('can:super-admin');
     //Permisos
     Route::get('permisos',[PermisoController::class,'index'])->middleware('can:super-admin');
-    
+
     //RolesPermisos
     Route::get('rolespermisos',[RolePermisoController::class,'index'])->middleware('can:super-admin');
-    
+
     //ProveedorRol
     Route::get('proveedores-roles',[ProveedorRolController::class,'index'])->middleware('can:super-admin');
     Route::post('proveedores-roles',[ProveedorRolController::class,'store'])->middleware('can:super-admin');
     //Route::put('proveedoresRoles/{id}',[ProveedorRolController::class,'update']);
-    
-    
-    //Proveedor 
+
+
+    //Proveedor
     Route::post('proveedores',[ProveedorController::class,'store'])->middleware('can:super-admin');
-   
+
 //});
 
 
@@ -82,7 +82,7 @@ Route::post('auth/login-proveedor',[AuthController::class,'loginProveedor']);
 
 /* ================================ TIENDA ======================= */
 //AUTH TIENDA
-Route::post('auth/loginCliente',[AuthTiendaController::class,'loginCliente']);
+Route::post('auth/login-cliente',[AuthTiendaController::class,'loginCliente']);
 Route::post('auth/loginClienteApiSocial',[AuthTiendaController::class,'loginClienteApiSocial']);
 Route::post('auth/registrarCliente',[AuthTiendaController::class,'registrarCliente']);
 

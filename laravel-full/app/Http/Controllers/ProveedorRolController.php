@@ -18,7 +18,7 @@ class ProveedorRolController extends Controller
         try {
             //https://stackoverflow.com/questions/67355363/using-laravel-8-with-spatie-package-try-to-get-user-list-with-role-issue-call-to
             //$all_users_with_all_direct_permissions = User::with('permissions')->get();
-            $proveedoresRoles = Proveedor::with('roles')->get(); 
+            $proveedoresRoles = Proveedor::with('roles')->get();
             return response()->json(["message"=>'success','data'=>$proveedoresRoles],200);
         } catch (\Throwable $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>$proveedoresRoles],400);
@@ -32,17 +32,17 @@ class ProveedorRolController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $proveedor=null;
         try {
-    
+
             $proveedor=Proveedor::where('correo',$request['correo'])->where('estado','1')->first();
             if($proveedor==null){
                 return response()->json(["message"=>"No existe el usuario"],400);
             }
-            //borrar los roles 
-            $proveedor->syncRoles([]); 
-            
+            //borrar los roles
+            $proveedor->syncRoles([]);
+
             //asignar lores
             foreach ($request->roles as $key => $value) {
                 $proveedor->assignRole($value['name']);
@@ -61,7 +61,7 @@ class ProveedorRolController extends Controller
      */
     public function show($id)
     {
-     
+
     }
 
     /**
@@ -75,18 +75,18 @@ class ProveedorRolController extends Controller
     {
         $proveedor=null;
         try {
-    
+
             $proveedor=Proveedor::where('id',$id)->where('estado','1')->first();
             if($proveedor==null){
                 return response()->json(["message"=>"No existe el usuario"],400);
             }
             //remover todos los roles
-            $proveedor->syncRoles([]); 
+            $proveedor->syncRoles([]);
 
             //reasignar roles
             foreach ($request->roles as $key => $value) {
                 $proveedor->assignRole($value['name']);
-            } 
+            }
             return response()->json(["message"=>'success','data'=>$proveedor],200);
         } catch (\Throwable $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>$proveedor],400);

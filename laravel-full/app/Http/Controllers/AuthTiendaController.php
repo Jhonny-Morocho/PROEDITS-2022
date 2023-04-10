@@ -11,23 +11,24 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 //jwt
  use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Hash;  
+//use Illuminate\Support\Facades\Hash;
 //jwt2
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
 use JWTFactory;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class AuthTiendaController extends Controller
-{    
+{
     //use AuthenticatesUsers;
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['registrarCliente','loginCliente','loginClienteApiSocial']]);
+        //$this->middleware('auth:api', ['except' => ['registrarCliente','loginCliente','loginClienteApiSocial']]);
     }
-    
+
     public function loginCliente(Request $request)
     {
         try {
+            
             return Repositorio\Auth\AuthRepositorio::loginCliente($request);
          }
          catch (\Throwable $th) {
@@ -51,8 +52,8 @@ class AuthTiendaController extends Controller
         }
 
     }
-    
-/* 
+
+/*
     public function logout()
     {
         Auth::logout();

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -76,6 +76,11 @@ return [
         'clientes' => [
             'driver' => 'eloquent',
             'model' => App\Models\Cliente::class,
+        ],
+
+        'proveedors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Proveedor::class,
         ],
 
        /*  'proveedors' => [

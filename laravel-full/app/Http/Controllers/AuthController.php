@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 //jwt
  use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Hash;  
+//use Illuminate\Support\Facades\Hash;
 //jwt2
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
@@ -22,7 +22,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['loginProveedor']]);
     }
-    
+
     public function loginProveedor(Request $request)
     {
 
@@ -41,7 +41,7 @@ class AuthController extends Controller
                     'status' => 'error',
                     'message' => 'Unauthorized',
                 ], 401);
-            } 
+            }
             $user = Auth::user();
             $proveedorRol= Proveedor::with('roles')->where('id',$user->id)->first();
             $payload = JWTFactory::proveedorRol($proveedorRol)->make();
@@ -61,7 +61,7 @@ class AuthController extends Controller
                         'token' => $token->get(),
                         'type' => 'bearer',
                     ]
-            ],201);  
+            ],201);
 
 
         } catch (\Throwable $th) {
@@ -75,8 +75,8 @@ class AuthController extends Controller
 
 
 
-    
-/* 
+
+/*
     public function logout()
     {
         Auth::logout();

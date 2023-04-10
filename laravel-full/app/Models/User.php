@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 ///roles
 
-class User extends Authenticatable implements JWTSubject 
-{   
+class User extends Authenticatable implements JWTSubject
+{
     use HasFactory, Notifiable;
     protected $table = 'proveedors';
+    //protected $table = 'proveedors';
     /**
      * The attributes that are mass assignable.
      *
@@ -65,5 +66,5 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
- 
+
 }

@@ -29,11 +29,11 @@ class AuthRepositorio {
                 'autenticacion'=>'required|string|max:50|min:1',
                 'password' => 'required|string|max:50|min:3'
             ]);
-            
+
             if ($validator->fails()) {
                 return response()->json(['message' => "Error en validación de información",'data'=>$validator->messages()], 401);
             }
-           
+
             $cliente=Cliente::where('correo',$request['correo'])->first();
             if($cliente!=null){
                 $payload = JWTFactory::cliente($cliente)->make();
@@ -66,17 +66,18 @@ class AuthRepositorio {
     }
     public static function loginCliente($request){
         $cliente=null;
-        try 
+        try
         {
             $credenciales = $request->only('correo','password');
             $validator = Validator::make($credenciales, [
                 'correo' => 'required|string|email',
                 'password' => 'required|string|max:50|min:3'
             ]);
-                
+
             if ($validator->fails()) {
                 return response()->json(['message' => "Error en validación de información",'data'=>$validator->messages()], 401);
             }
+
             $cliente=Cliente::where('correo',$request['correo'])->first();
             if($cliente==null){
                 return response()->json(["message"=>"Usuario no existe",'data'=>$cliente],200);
@@ -106,13 +107,13 @@ class AuthRepositorio {
             return response()->json([
                 'message' => 'success',
                 'data' => array(
-                    'usuario'=>$auxCliente,  
+                    'usuario'=>$auxCliente,
                     'authorisation' => [
                         'token' => $token->get(),
                         'type' => 'bearer',
                     ]
                 ),
-              
+
             ],201);
         } catch (\Throwable $th) {
             return response()->json(["message"=>$th->getMessage(),'data'=>null],400);
@@ -128,16 +129,16 @@ class AuthRepositorio {
                 'correo' => 'required|string|email',
                 'password' => 'required|string|max:50|min:1'
             ]);
-            
+
             if ($validator->fails()) {
                 return response()->json(['message' => "Error en validación de información",'data'=>$validator->messages()], 401);
             }
-        
+
             $cliente=Cliente::where('correo',$request['correo'])->first();
             if($cliente==null){
                 return response()->json(["message"=>"Usuario no existe",'data'=>$cliente],200);
             }
-        
+
             if (!$token = auth()->guard('clienteApi')->attempt($credenciales)) {
                 return response()->json([
                     'message' => 'Unauthorized',
@@ -157,13 +158,13 @@ class AuthRepositorio {
             return response()->json([
                 'message' => 'success',
                 'data' => array(
-                    'usuario'=>$auxCliente,  
+                    'usuario'=>$auxCliente,
                     'authorisation' => [
                         'token' => $token->get(),
                         'type' => 'bearer',
                     ]
                 ),
-              
+
             ],201);
         } catch (\Throwable $th) {
             return response()->json(["sms"=>$th->getMessage(),"Siglas"=>"ERROR"]);
